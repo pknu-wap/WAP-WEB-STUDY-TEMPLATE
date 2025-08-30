@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko_kr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>은호의 자기소개서</title>
+    <style>
+      #container {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+      }
+    </style>
+  </head>
+  <body id="body">
+    <div id="container">
+      <h1>안녕하세요! 저는 이은호입니다.</h1>
+      <h2>
+        저는 웹 개발자 지망생으로, 다양한 프로젝트를 통해 실력을 쌓아가고
+        있습니다.
+      </h2>
+      <h2>저의 포트폴리오를 통해 저에 대해 더 알아가세요!</h2>
+      <img
+        src="https://static.wikia.nocookie.net/partyparrot/images/9/92/Party_Parrot.gif/revision/latest/thumbnail/width/360/height/450?cb=20170401182204"
+        alt="party parrot.gif"
+      />
+      <a
+        href="https://github.com/lepitaaar"
+        style="font-size: 4rem; font-weight: 700"
+        id="github"
+        >깃허브</a
+      >
+      <br />
+      <br />
+      <br />
+      <a id="backToTheHome" href="index.html">Back To the HOOOME</a>
+      <img
+        id="cat"
+        src="just cute cat.gif"
+        alt="그냥 기여운 고양이"
+        style="position: absolute"
+        onclick="
+          window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
+          "
+      />
+    </div>
+  </body>
+
+  <script>
+    const container = document.getElementById("body");
+    let hue = 0;
+    let degree = 0;
+    function changeColor() {
+      container.style.backgroundColor = `hsl(${hue}, 80%, 70%)`;
+      hue = (hue + 2) % 360;
+    }
+    setInterval(changeColor, 40);
+    const github = document.getElementById("github");
+    function rotateElement() {
+      github.style.transform = `rotate(${degree}deg)`;
+      degree = (degree + 2) % 360;
+    }
+    setInterval(rotateElement, 20);
+    const backToTheHome = document.getElementById("backToTheHome");
+    function moveElement() {
+      backToTheHome.style.transform = `translateX(${
+        Math.sin(degree * (Math.PI / 180)) * 20
+      }px)`;
+    }
+    function changeFont() {
+      const fonts = [
+        "Arial, sans-serif",
+        "'Courier New', Courier, monospace",
+        "'Times New Roman', Times, serif",
+        "'Lucida Console', Monaco, monospace",
+        "'Comic Sans MS', cursive, sans-serif",
+        "'Trebuchet MS', sans-serif",
+        "'Georgia', serif",
+        "'Palatino Linotype', 'Book Antiqua', Palatino, serif",
+        "'Impact', Charcoal, sans-serif",
+      ];
+      const randomFont = fonts[Math.floor(Math.random() * fonts.length)];
+      const randomSize = Math.floor(Math.random() * 24) + 16 + "px";
+      backToTheHome.style.fontFamily = randomFont;
+      backToTheHome.style.fontSize = randomSize;
+    }
+    setInterval(moveElement, 20);
+    setInterval(changeFont, 50);
+    const cat = document.getElementById("cat");
+    let catX = 0;
+    let catY = 0;
+    let catDirectionX = 1;
+    let catDirectionY = 1;
+    let catAngle = 0;
+    let catSize = 100;
+    let additionalTime = 0;
+    function moveCat() {
+      const containerWidth = window.innerWidth;
+      const containerHeight = window.innerHeight;
+      const catWidth = cat.offsetWidth;
+      const catHeight = cat.offsetHeight;
+      catX += catDirectionX * 10;
+      catY += catDirectionY * 9;
+      if (catX + catWidth > containerWidth || catX < 0) {
+        catDirectionX *= -1;
+      }
+      if (catY + catHeight > containerHeight || catY < 0) {
+        catDirectionY *= -1;
+      }
+      cat.style.left = catX + "px";
+      cat.style.top = catY + "px";
+      catAngle = (catAngle + 10) % 360;
+      cat.style.transform = `rotate(${catAngle}deg)`;
+      catSize = 400 + 20 * Math.sin(catAngle * (Math.PI / 180));
+      cat.style.width = catSize + "px";
+      if (additionalTime % 100 === 0) {
+        console.log(additionalTime);
+        additionalTime = 0;
+        const newCat = document.createElement("img");
+        newCat.src = cat.src;
+        newCat.alt = cat.alt;
+        newCat.style.position = "absolute";
+        newCat.style.left = Math.random() * (window.innerWidth - 100) + "px";
+        newCat.style.top = Math.random() * (window.innerHeight - 100) + "px";
+        newCat.style.width = "100px";
+        newCat.onclick = function () {
+          window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank");
+        };
+        document.body.appendChild(newCat);
+      }
+      additionalTime++;
+    }
+    setInterval(moveCat, 20);
+  </script>
+</html>
